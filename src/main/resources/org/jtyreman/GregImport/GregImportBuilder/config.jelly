@@ -1,0 +1,48 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <!--
+    This jelly script is used for per-project configuration.
+
+    See global.jelly for a general discussion about jelly script.
+  -->
+  <!--
+    Creates a text field that shows the value of the "name" property.
+    When submitted, it will be passed to the corresponding constructor parameter.
+  -->
+  <f:entry title="Service Name" field="artefactName" default="${env.JOB_NAME}" description="Add the ServiceName">
+    <f:textbox />
+  </f:entry>
+     <f:entry title="Service Description" field="artefactDescription" description="Add an informative description.">
+    <f:textarea />
+  </f:entry>
+ <f:entry title="Service Version" field="artefactVersion" description="Enter the Service Version (x.x.x)" >
+    <f:textbox />
+  </f:entry>
+
+  <f:nested>
+      <f:optionalBlock name="restService" inline="true" title="REST" checked="${instance.restService}">
+        <f:entry title="Service Endpoint"  name="artefactContext" field="artefactContext">
+          <f:textbox/>
+        </f:entry>
+      </f:optionalBlock>
+  </f:nested>
+
+  <f:nested>
+      <f:optionalBlock name="soapService" inline="true" title="SOAP" checked="${instance.soapService}">
+        <f:entry title="Service Namespace" name="artefactNamespace" field="artefactNamespace">
+          <f:textbox/>
+        </f:entry>
+      </f:optionalBlock>
+  </f:nested>
+  
+ 
+  <f:entry title="Process WSDL's" field="processWsdls" description="Check to scan project for WSDL's and send to GREG" >
+    <f:checkbox />
+  </f:entry>
+  
+   <f:entry title="Process XSD's" field="processXsds" description="Check to scan project for XSD's and send to GREG" >
+    <f:checkbox />
+  </f:entry>
+	
+    
+</j:jelly>
